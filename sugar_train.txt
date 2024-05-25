@@ -1,0 +1,27 @@
+module part:
++ Thêm 1 trường part_address: lưu địa chỉ type: varchar length: 100;
++ chỉnh label của part_address: Địa chỉ Part; account_name: Khách hàng
++ thêm 1 trường account_id(relate) vào database và thể hiên trên listview, detail, edit.
++ Editviewdefs, detailviewdefs: thêm 1 cái panel mới: ở đó có 2 trường part_address và account_name.
++ nâng cao: thêm 1 custom code của account_name;
+  . tạo editviewdefs.
+  . tạo 1 folder 'views' => 'view,edit.php'.
+ .<?php
+if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
+require_once('include/MVC/View/views/view.edit.php');
+
+class <tên module>ViewEdit extends ViewEdit {
+  function <tên module>ViewEdit(){
+     parent::ViewEdit();
+   }
+  
+  function display() {
+    $this->customFields();   
+    parent::display(); 
+  } 
+     function customField(){
+            $html = '';
+            $this->ss->assign('CUSTOM_ACCOUNT', $html)
+      }
+}
+?>
