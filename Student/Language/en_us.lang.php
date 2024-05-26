@@ -40,7 +40,9 @@ $mod_strings = array (
     'LBL_EMAIL_PARENT' => 'Địa chỉ mail phụ huynh',
     'LBL_CLASSES_ID'=> 'ID lớp',
     'LBL_CLASSES_NAME'=> 'Tên lớp',
-    'LBL_AVERAGE_POINT'=> 'Điểm trung bình',
+    'LBL_AVERAGE_POINT_1'=> 'Điểm trung bình HK 1',
+    'LBL_AVERAGE_POINT_2'=> 'Điểm trung bình HK2',
+    'LBL_AVERAGE_POINT_FINAL'=> 'Điểm trung bình cả năm',
     'LBL_RATING'=> 'Xếp loại',
 
 

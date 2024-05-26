@@ -32,23 +32,30 @@ class StudentViewDetail extends ViewDetail
                 <th>Point 45</th>
                 <th>Point Exam</th>
                 <th>Final Point</th>
+                <th>Semeter</th>
                 <th>Rating</th>
             </tr>
             </thead>
             <tbody>';
 
-        $sql = "SELECT subject_id, subject_name, point_answer, point_15, point_45, point_exam, final_point, rating 
+        $sql = "SELECT subject_id, subject_name, point_answer, point_15, point_45, point_exam, final_point, semester 
         FROM point  WHERE student_id = '" . $this->bean->id . "' and deleted = 0";
 
-        $sql_get_point = "SELECT final_point FROM point WHERE student_id = '" .$this->bean->id. "' and deleted = 0";
+        $sql_get_point_semeter_2 = "SELECT final_point FROM point WHERE student_id = '" .$this->bean->id. "' and deleted = 0 and semester = 2";
 
-        $res_point = $db->query($sql_get_point);
-        $count_point = $db->getRowCount($res_point);
-        $sum_point = 0;
-        while($row_point = $db->fetchByAssoc($res_point)) {
-            $sum_point += $row_point["final_point"];
-        }
-        $this->SetAveragePointAndRating($count_point, $sum_point, $this->bean->id);
+        $sql_get_point_semeter_1 = "SELECT final_point FROM point WHERE student_id = '" .$this->bean->id. "' and deleted = 0 and semester = 1";
+
+        // $res_point = $db->query($sql_get_point);
+        // $count_point = $db->getRowCount($res_point);
+        // $sum_point = 0;
+        // while($row_point = $db->fetchByAssoc($res_point)) {
+        //     $sum_point += $row_point["final_point"];
+        // }
+        // $this->SetAveragePointAndRating($count_point, $sum_point, $this->bean->id);
+
+        $point_semester1 = $this -> SetAveragePointSemester1($sql_get_point_semeter_1, $db, $this->bean->id);
+        $point_semester2 = $this -> SetAveragePointSemester2($sql_get_point_semeter_2, $db, $this->bean->id);
+        $this -> SetAveragePointFinalAndRating($point_semester1, $point_semester2, $this-> bean->id);
 
 
         $res = $db->query($sql);
@@ -65,19 +72,21 @@ class StudentViewDetail extends ViewDetail
             $html .= '<td style="text-align:center;">' .$row['point_45']. '</td>';
             $html .= '<td style="text-align:center;">' .$row['point_exam']. '</td>';
             $html .= '<td style="text-align:center;">' .$row['final_point']. '</td>';
-            $html .= '<td style="text-align:center;">' .$row['rating']. '</td>';
+            $html .= '<td style="text-align:center;">' .$row['semester']. '</td>';
+            $html .= '<td></td>';
             $html .= '</tr>';
 
             $count+=1;
         }
         $html .= '<tr name="average">';
-        $html .= '<td style="text-align:center;">Tổng:</td>';
+        $html .= '<td style="text-align:center;">Tổng kết:</td>';
         $html .= '<td></td>';
         $html .= '<td></td>';
         $html .= '<td></td>';
         $html .= '<td></td>';
         $html .= '<td></td>';
-        $html .= '<td class="average_point" id="average_point" style="text-align:center;">'. $this->bean->average_point .'</td>';
+        $html .= '<td class="average_point" id="average_point" style="text-align:center;">'. $this->bean->average_point_final .'</td>';
+        $html .= '<td></td>';
         $html .= '<td class="rating" id="rating" style="text-align:center;">'. $this->bean->rating .'</td>';
 
         $html .= '</tr>';
@@ -101,9 +110,8 @@ class StudentViewDetail extends ViewDetail
         </style>";
     }
 
-    function SetAveragePointAndRating($count_point, $sum_point, $id){
-        $average_point = $count_point == 0 ? 0 : $sum_point / $count_point;
-        // var_dump($count_point);
+    function SetAveragePointFinalAndRating($point_semester1, $point_semester2, $id){
+        $average_point = ($point_semester1 + $point_semester2) / 2;
         $rating = "";
 
         if($average_point < 5){
@@ -115,10 +123,43 @@ class StudentViewDetail extends ViewDetail
         }
 
         $this->bean->id = $id;
-        $this->bean->average_point = $average_point;
+        $this->bean->average_point_final = $average_point;
         $this->bean->rating = $rating;
         $this->bean->save();
-
     }
+
+    function SetAveragePointSemester1($sql, $db, $id){
+        $res_point_semester1 = $db->query($sql);
+        $res_count = $db->getRowCount($res_point_semester1);
+        $sum_point = 0;
+        while($row_point = $db->fetchByAssoc($res_point_semester1)) {
+            $sum_point += $row_point["final_point"];
+        }
+        $average_point = $res_count == 0 ? 0: $sum_point / $res_count;
+
+        $this->bean->id = $id;
+        $this->bean->average_point_1 = $average_point;
+        $this->bean->save();
+
+        return $average_point;
+    }
+
+    function SetAveragePointSemester2($sql, $db, $id){
+        $res_point_semester1 = $db->query($sql);
+        $res_count = $db->getRowCount($res_point_semester1);
+        $sum_point = 0;
+        while($row_point = $db->fetchByAssoc($res_point_semester1)) {
+            $sum_point += $row_point["final_point"];
+        }
+        $average_point = $res_count == 0 ? 0: $sum_point / $res_count;
+
+        $this->bean->id = $id;
+        $this->bean->average_point_2 = $average_point;
+        $this->bean->save();
+
+        return $average_point;
+    }
+
+
 
 }

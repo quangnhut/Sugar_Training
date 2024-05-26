@@ -34,8 +34,6 @@ $viewdefs['Study']['DetailView'] = array(
                 'subject_name',
                 'semester',
             ),
-            
-            
         ),
         'BANG DIEM'=> array(
             array(

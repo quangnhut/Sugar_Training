@@ -47,6 +47,12 @@ $listViewDefs['Point'] = array(
         'label' => 'LBL_SUBJECT_NAME',
         'default' => true
     ),
+    'SEMESTER' => array(
+        'width' => '5',
+        'label' => 'LBL_SEMESTER',
+        'default' => true
+    ),
+
     'DATE_MODIFIED' => array(
         'width' => '5',
         'label' => 'LBL_DATE_MODIFIED',

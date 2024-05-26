@@ -46,7 +46,7 @@ $mod_strings = array (
     'LBL_CLASSES_NAME'=> 'Tên lớp',
     'LBL_SUBJECT_ID'=> 'ID subject',
     'LBL_SUBJECT_NAME'=> 'Môn học',
-    'LBL_SEMESTER'=> 'Niên khóa',
+    'LBL_SEMESTER'=> 'Học kỳ',
     'LBL_RATING'=> 'Xếp loại',
 
 

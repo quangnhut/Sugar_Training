@@ -46,6 +46,15 @@ $dictionary['Point'] = array(
                 'type' => 'varchar',
                 'len' => '50',
             ),
+            'semester' =>
+            array(
+                'name' => 'semester',
+                'vname' => 'LBL_SEMESTER',
+                'type' => 'enum',
+                'len' => '50',
+                'options' => 'semester_point_enum',
+            ),
+
             'student_id' =>
             array(
                 'name' => 'student_id',

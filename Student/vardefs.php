@@ -70,10 +70,24 @@ $dictionary['Student'] = array(
                 'len' => '255',
                 'id_name' => 'classes_id',
             ),
-            'average_point' =>
+            'average_point_1' =>
             array(
-                'name' => 'average_point',
-                'vname' => 'LBL_AVERAGE_POINT',
+                'name' => 'average_point_1',
+                'vname' => 'LBL_AVERAGE_POINT_1',
+                'type' => 'float',
+                'len' => '15',
+            ),
+            'average_point_2' =>
+            array(
+                'name' => 'average_point_2',
+                'vname' => 'LBL_AVERAGE_POINT_2',
+                'type' => 'float',
+                'len' => '15',
+            ),
+            'average_point_final' =>
+            array(
+                'name' => 'average_point_final',
+                'vname' => 'LBL_AVERAGE_POINT_FINAL',
                 'type' => 'float',
                 'len' => '15',
             ),

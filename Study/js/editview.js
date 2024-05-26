@@ -2,10 +2,8 @@ $(document).ready(function () {
 
     $("#btnAddRow").on("click", function () {
         var count_row = parseInt($('#count_row').val());
-
         $('#last_row').before(insertRow(count_row + 1));
         SetCountSTT();
-
     });
 });
 
@@ -48,7 +46,6 @@ function markPointDeleted(count) {
         // remove the row if it not contain pointID
         $("#ct_line_" + count).remove();
     }
-
     SetCountSTT();
 }
 

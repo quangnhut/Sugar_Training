@@ -40,8 +40,12 @@ $viewdefs['Point']['DetailView'] = array(
             ),
             array(
                 'final_point',
+                'semester',
+            ),
+            array(
                 'rating',
             ),
+
         ),
     
     ),

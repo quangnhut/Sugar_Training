@@ -29,19 +29,21 @@ class ClassesViewDetail extends ViewDetail
                 <th>Student Name</th>
                 <th>Address</th>
                 <th>Email</th>
-                <th>Average Point</th>
+                <th>Point semester 1</th>
+                <th>Point semester 2</th>
+                <th>Point final</th>
                 <th>Rating</th>
             </tr>
             </thead>
             <tbody>';
 
-        $sql = "SELECT id, name, address, email, photo, average_point, rating 
+        $sql = "SELECT id, name, address, email, photo, average_point_1, average_point_2, average_point_final, rating 
         FROM student  WHERE classes_id = '" . $this->bean->id . "' and deleted = 0";
 
         $res = $db->query($sql);
         $row_count = $db->getRowCount($res);
         $count = 1;
-        // var_dump($sql);
+        var_dump($res);
 
         while ($row = $db->fetchByAssoc($res)) {
             $html .= '<tr id="ct_line_' . $count . '">';
@@ -49,7 +51,9 @@ class ClassesViewDetail extends ViewDetail
             $html .= '<td style="text-align:center;"><a href="index.php?module=Student&action=DetailView&record='.$row['id'].'" target="_blank">' .$row['name'] .'</a></td>';
             $html .= '<td style="text-align:center;">' .$row['address']. '</td>';
             $html .= '<td style="text-align:center;">' .$row['email']. '</td>';
-            $html .= '<td style="text-align:center;">' .$row['average_point']. '</td>';
+            $html .= '<td style="text-align:center;">' .$row['average_point_1']. '</td>';
+            $html .= '<td style="text-align:center;">' .$row['average_point_2']. '</td>';
+            $html .= '<td style="text-align:center;">' .$row['average_point_final']. '</td>';
             $html .= '<td style="text-align:center;">' .$row['rating']. '</td>';
 
             $html .= '</tr>';

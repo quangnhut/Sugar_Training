@@ -71,17 +71,15 @@ class Study extends Basic{
             //save in modules point
             if(!empty($student_name[$i])){
                 $this->saveDetail($point_answer[$i], $point_15[$i], $point_45[$i], $point_exam[$i], $student_name[$i], $student_id[$i], 
-                $this-> id, $point_id[$i], $ct_deleted[$i], $this -> subject_id, $this -> subject_name);
+                $this-> id, $point_id[$i], $ct_deleted[$i], $this -> subject_id, $this -> subject_name, $this->semester);
             }
         }
-
         // $this -> SaveClasses($this -> classes_id, $this -> teacher_id, $this -> subject_id);
-
     }
 
 
     public function saveDetail($point_answer, $point_15, $point_45, $point_exam, $student_name, $student_id, 
-    $study_id, $point_id, $ct_deleted, $subject_id, $subject_name){
+    $study_id, $point_id, $ct_deleted, $subject_id, $subject_name, $semester){
         $point_detail = new Point() ;
         $final_point = 0;
 
@@ -98,6 +96,7 @@ class Study extends Basic{
         $point_detail -> study_id = $study_id;
         $point_detail -> subject_id = $subject_id;
         $point_detail -> subject_name = $subject_name;
+        $point_detail -> semester = $semester;
 
         if(!empty($point_id) && $ct_deleted == "0"){
             $point_detail -> id = $point_id;

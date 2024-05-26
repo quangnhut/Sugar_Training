@@ -34,6 +34,7 @@ class Point extends Basic
     // var $classes_name;
     var $subject_id;
     var $subject_name;
+    var $semester;
 
 
     public function Point()

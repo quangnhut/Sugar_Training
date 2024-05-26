@@ -27,7 +27,9 @@ class Student extends Basic{
     var $email_parent;
     var $classes_id;
     var $classes_name;
-    var $average_point;
+    var $average_point_1;
+    var $average_point_2;
+    var $average_point_final;
     var $rating;
 
 
