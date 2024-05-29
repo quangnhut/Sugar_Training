@@ -13,8 +13,12 @@ class Viewprint extends SugarView
     function display()
     {
         global $db, $current_user, $app_list_strings;
+        $studentID = $_REQUEST['record'] ? $_REQUEST['record'] : "";
+        // var_dump($_REQUEST);
 
-        $sql = 'SELECT name, average_point_final, phone, address, email, phone_parent, date_modified, photo FROM student where name ="hoc sinh 01" and deleted = 0';
+        $sql = 'SELECT name, average_point_final, phone, address, email, phone_parent, date_modified, photo 
+        FROM student where id = "'.$studentID.'"  and deleted = 0';
+
         $res = $db->query($sql);
         $row = $db->fetchByAssoc($res);
         $customer_name = $row['name'];
@@ -41,37 +45,35 @@ class Viewprint extends SugarView
         $smart->assign('products',$products);
 
 
-
-        $smart->display('modules/Study/tpls/printtpl.tpl');
+        $smart->display('modules/Student/tpls/printtpl.tpl');
     }
 
     function GetAllData($db){
         global $current_user, $app_list_strings;
 
-        $sql = 'SELECT name, average_point_final, phone, rating FROM student where deleted = 0';
+        $sql = 'SELECT name, average_point_final, phone, rating 
+        FROM student where deleted = 0';
         $res = $db->query($sql);
-        $count_row = $db->getRowCount($res);
+        // $count_row = $db->getRowCount($res);
         $html = '';
         $count = 1;
 
             while($row = $db->fetchByAssoc($res)){
                 $amount = (float)$row['phone'] * (float)$row['average_point_final'];
 
-                $html.='<tr>';
-                $html.='<td style="text-align: center">' .$count.' </td>';
-                $html.='<td style="text-align: center">' .$row['name'].' </td>';
-                $html.='<td style="text-align: center">' .$row['phone'].' </td>';
-                $html.='<td style="text-align: center">' .$row['average_point_final'].' </td>';
-                $html.='<td style="text-align: center">0</td>';
-                $html.='<td class="amount" style="text-align: center">'.$amount.'</td>';
-                $html.='<td style="text-align: center">'.$row['rating'].'</td>';
+                $html.='<tr class="tr_demo">';
+                $html.='<td>' .$count.' </td>';
+                $html.='<td>' .$row['name'].' </td>';
+                $html.='<td>' .$row['phone'].' </td>';
+                $html.='<td>' .$row['average_point_final'].' </td>';
+                $html.='<td>0</td>';
+                $html.='<td class="amount">'.$amount.'</td>';
+                $html.='<td>'.$row['rating'].'</td>';
                 $html.='</tr>';
                 $count +=1;
 
             }
             return $html;
-
-
 
     }
     
